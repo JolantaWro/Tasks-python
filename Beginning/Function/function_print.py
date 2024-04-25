@@ -1,0 +1,1 @@
+print("It will be a beautiful adventure!")
