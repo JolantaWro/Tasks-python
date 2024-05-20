@@ -23,6 +23,9 @@ def replace_words(text, replacements):
 modified_text = replace_words(text, replacements)
 print(modified_text)
 
+def find_words(text, word):
+    return word in text
+
 
 
 
