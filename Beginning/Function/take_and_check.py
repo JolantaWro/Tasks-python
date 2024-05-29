@@ -4,6 +4,3 @@ def get_data():
 
 def take_return_type(user_info):
     return type(user_info).__name__
-
-
-get_data()
