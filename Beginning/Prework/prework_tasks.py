@@ -24,10 +24,10 @@ def counter_subtract_value(user_number):
     return user_number
 
 def difference_age():
-    age_father = input("Enter year of birth father: ")
-    age_father = int(age_father)
-    age_child = input("Enter year of birth child: ")
-    age_child = int(age_child)
+    age_father = int(input("Enter year of birth father: "))
+    age_child = int(input("Enter year of birth child: "))
     result = f"Father is {age_child - age_father} years older than child"
 
     return result
+
+print(difference_age())
