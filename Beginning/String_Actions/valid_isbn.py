@@ -4,6 +4,46 @@ The ISBN-10 format is 9 digits (0 to 9) plus one check character (either a digit
 
 """
 
+def valid_ISBN(isbn):
+    number_isbn = isbn.replace("-", "")
 
-def is_valid(isbn):
-    pass
+#   if re.match(r"^\d{9}[\dX]$", number_isbn):
+
+#     total = 0
+#     for i in range(9):
+#         total += int(number_isbn[i]) * (10 - i)
+
+#     last_char = number_isbn[9]
+#     if last_char == 'X':
+#         total += 10
+#     else:
+#         total += int(last_char)
+
+#     if total % 11 == 0:
+#         return "TAK"
+#     else:
+#         return "Check your number"
+#   else:
+#     return "Check your number"
+
+    if len(number_isbn) != 10:
+        return "Check your number"
+
+    if not (number_isbn[:9].isdigit() and (number_isbn[9].isdigit() or number_isbn[9] == 'X')):
+        return "Check your number"
+
+    total = 0
+    for i in range(9):
+        total += int(number_isbn[i]) * (10 - i)
+
+    if number_isbn[9] == 'X':
+        total += 10
+    else:
+        total += int(number_isbn[9])
+
+    if total % 11 == 0:
+        return "TAK"
+    else:
+        return "Check your number"
+    
+
