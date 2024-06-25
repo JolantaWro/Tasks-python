@@ -18,4 +18,23 @@ def get_change(budget, exchanging_value):
 
     return budget - exchanging_value
 
-print(get_change(463000, 5000))
+def get_value_of_bills(denomination, number_of_bills):
+    """
+
+    :param denomination: int - the value of a bill.
+    :param number_of_bills: int - total number of bills.
+    :return: int - calculated value of the bills.
+    """
+
+    return denomination * number_of_bills
+
+def get_number_of_bills(amount, denomination):
+    """
+
+    :param amount: float - the total starting value.
+    :param denomination: int - the value of a single bill.
+    :return: int - number of bills that can be obtained from the amount.
+    """
+
+    return amount // denomination
+
