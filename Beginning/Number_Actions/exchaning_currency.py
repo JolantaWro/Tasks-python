@@ -38,3 +38,12 @@ def get_number_of_bills(amount, denomination):
 
     return amount // denomination
 
+def get_leftover_of_bills(amount, denomination):
+    """
+
+    :param amount: float - the total starting value.
+    :param denomination: int - the value of a single bill.
+    :return: float - the amount that is "leftover", given the current denomination.
+    """
+
+    pass
