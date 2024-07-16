@@ -20,3 +20,6 @@ true_variable = True
 false_variable =False
 print(number_variable, comma_variable, string_variable, true_variable, false_variable)
 print("****************************")
+
+value_user = input("Enter something: ")
+print(f"You wrote this: {value_user}")
