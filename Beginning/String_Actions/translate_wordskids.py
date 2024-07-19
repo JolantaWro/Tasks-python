@@ -32,3 +32,12 @@ def translate(text):
         return text[3:] + text[0:3] + "ay"
     
 
+print(translate("apple"))
+print(translate("ear"))
+print(translate("igloo"))
+print(translate("object"))
+print(translate("under"))
+print(translate("equal"))
+# print(translate("pig")) fix it!
+# print(translate("koala"))
+print(translate("xenon"))
