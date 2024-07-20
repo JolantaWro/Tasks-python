@@ -30,4 +30,13 @@ def difference_age():
 
     return result
 
-print(difference_age())
+def fizzbuzz():
+    for element in range(1, 101):
+        if (element % 3 == 0 and element % 5 == 0):
+            print("FizzBuzz")
+        elif(element % 3 == 0):
+            print("Fizz")
+        elif(element % 5 == 0):
+            print("Buzz")
+        else:
+            print(element)
