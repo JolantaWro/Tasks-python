@@ -11,7 +11,8 @@ def get_rounds(number):
     :return: list - current round and the two that follow.
     """
     list_numbers = []
-    list_numbers.append(number)
+    for element in range(3):
+        list_numbers.append(number + element)
     return list_numbers
 
 
@@ -24,7 +25,8 @@ def concatenate_rounds(rounds_1, rounds_2):
     :return: list - all rounds played.
     """
 
-    pass
+    list_rounds = rounds_1 + rounds_2
+    return list_rounds
 
 
 def list_contains_round(rounds, number):
