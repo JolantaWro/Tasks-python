@@ -36,8 +36,10 @@ def list_contains_round(rounds, number):
     :param number: int - round number.
     :return: bool - was the round played?
     """
-
-    pass
+    if number in rounds:
+        return True
+    else:
+        return False
 
 
 def card_average(hand):
