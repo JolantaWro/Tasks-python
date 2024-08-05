@@ -80,7 +80,16 @@ def average_even_is_average_odd(hand):
     :return: bool - are even and odd averages equal?
     """
 
-    pass
+    if not hand:
+        return True 
+    
+    even_values = [hand[i] for i in range(0, len(hand), 2)]
+    odd_values = [hand[i] for i in range(1, len(hand), 2)]
+    
+    average_even = sum(even_values) / len(even_values) if even_values else 0
+    average_odd = sum(odd_values) / len(odd_values) if odd_values else 0
+    
+    return average_even == average_odd
 
 
 def maybe_double_last(hand):
