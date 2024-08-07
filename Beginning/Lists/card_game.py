@@ -107,3 +107,22 @@ def maybe_double_last(hand):
         hand[-1] = 22
         
     return hand
+
+def value_of_card(card):
+    """Determine the scoring value of a card.
+
+    :param card: str - given card.
+    :return: int - value of a given card.  See below for values.
+
+    1.  'J', 'Q', or 'K' (otherwise known as "face cards") = 10
+    2.  'A' (ace card) = 1
+    3.  '2' - '10' = numerical value.
+    """
+
+    if card in ['J', 'Q', 'K']:
+        return 10
+    elif card == 'A':
+        return 1
+    else:
+        return int(card)
+
