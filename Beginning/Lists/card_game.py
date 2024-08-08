@@ -126,3 +126,28 @@ def value_of_card(card):
     else:
         return int(card)
 
+
+def higher_card(card_one, card_two):
+    """Determine which card has a higher value in the hand.
+
+    :param card_one, card_two: str - cards dealt in hand.  See below for values.
+    :return: str or tuple - resulting Tuple contains both cards if they are of equal value.
+
+    1.  'J', 'Q', or 'K' (otherwise known as "face cards") = 10
+    2.  'A' (ace card) = 1
+    3.  '2' - '10' = numerical value.
+    """
+
+    card_values = {'J': 10, 'Q': 10, 'K': 10, 'A': 1}
+
+    value_one = card_values.get(card_one, int(card_one) if card_one.isdigit() else 0)
+
+    value_two = card_values.get(card_two, int(card_two) if card_two.isdigit() else 0)
+    if value_one > value_two:
+        return card_one
+    elif value_two > value_one:
+        return card_two
+    else:
+        return card_one, card_two
+    
+    
