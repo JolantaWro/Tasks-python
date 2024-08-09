@@ -149,5 +149,39 @@ def higher_card(card_one, card_two):
         return card_two
     else:
         return card_one, card_two
+
+
+def value_of_ace(card_one, card_two):
+    """Calculate the most advantageous value for the ace card.
+
+    :param card_one, card_two: str - card dealt. See below for values.
+    :return: int - either 1 or 11 value of the upcoming ace card.
+
+    1.  'J', 'Q', or 'K' (otherwise known as "face cards") = 10
+    2.  'A' (ace card) = 11 (if already in hand)
+    3.  '2' - '10' = numerical value.
+    """
+
+    if card_one in ['J', 'Q', 'K']:
+        value_one = 10
+    elif card_one == 'A':
+        value_one = 11
+    else:
+        value_one = int(card_one)
+    
+    if card_two in ['J', 'Q', 'K']:
+        value_two = 10
+    elif card_two == 'A':
+        value_two = 11
+    else:
+        value_two = int(card_two)
+
+    total_value = value_one + value_two
+
+    
+    if total_value + 11 <= 21:
+        return 11
+    else:
+        return 1
     
     
