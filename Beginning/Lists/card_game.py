@@ -218,3 +218,18 @@ def can_split_pairs(card_one, card_two):
             return int(card)
 
     return value_of_card(card_one) == value_of_card(card_two)
+
+def can_double_down(card_one, card_two):
+    """Determine if a blackjack player can place a double down bet.
+
+    :param card_one, card_two: str - first and second cards in hand.
+    :return: bool - can the hand can be doubled down? (i.e. totals 9, 10 or 11 points).
+    """
+
+    card_values = {
+        '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
+        'J': 10, 'Q': 10, 'K': 10, 'A': 1  # Ace is treated as 1 for simplicity
+    }
+
+    total = card_values[card_one] + card_values[card_two]
+    return total in {9, 10, 11}
