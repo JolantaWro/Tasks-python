@@ -233,3 +233,20 @@ def can_double_down(card_one, card_two):
 
     total = card_values[card_one] + card_values[card_two]
     return total in {9, 10, 11}
+
+def is_armstrong_number(number):
+   
+    digits = str(number)
+    
+    num_digits = len(digits)
+    
+   
+    sum_of_powers = sum(int(digit) ** num_digits for digit in digits)
+     
+    return sum_of_powers == number
+
+number = 153
+if is_armstrong_number(number):
+    print(f"{number} is an Armstrong number.")
+else:
+    print(f"{number} is not an Armstrong number.")
