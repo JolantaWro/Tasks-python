@@ -250,3 +250,19 @@ if is_armstrong_number(number):
     print(f"{number} is an Armstrong number.")
 else:
     print(f"{number} is not an Armstrong number.")
+
+
+
+def steps(number):
+     if n <= 0:
+        raise ValueError("Input must be a strictly positive integer.")
+    
+    steps = 0
+    while n != 1:
+        if n % 2 == 0:
+            n = n // 2
+        else:
+            n = 3 * n + 1
+        steps += 1
+    
+    return steps
