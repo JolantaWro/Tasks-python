@@ -266,3 +266,36 @@ def steps(number):
         steps += 1
     
     return steps
+
+def translate(text):
+    def translate_word(word):
+        vowels = ["a", "e", "i", "o", "u"]
+        consonant_clusters = ["ch", "thr", "th", "qu", "rh", "yt", "xr"]
+        
+       
+        if word[0] in vowels or word[:2] in ["xr", "yt"]:
+            return word + "ay"
+        
+       
+        for cluster in consonant_clusters:
+            if word.startswith(cluster):
+                return word[len(cluster):] + cluster + "ay"
+        
+        
+        for i in range(len(word)):
+            if word[i] in vowels or word[i:i+2] == "qu":
+                return word[i:] + word[:i] + "ay"
+        
+       
+        if 'y' in word:
+            y_index = word.index('y')
+            return word[y_index:] + word[:y_index] + "ay"
+        
+      
+        return word + "ay"
+    
+   
+    translated_words = [translate_word(word) for word in text.lower().split()]
+    
+    
+    return ' '.join(translated_words)
