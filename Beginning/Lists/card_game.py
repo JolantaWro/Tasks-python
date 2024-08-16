@@ -293,6 +293,17 @@ def translate(text):
         
       
         return word + "ay"
+
+def square(number):
+
+    if number < 1 or number > 64:
+        raise ValueError("Square number must be between 1 and 64.")
+
+    return 2 ** (number - 1)
+
+def total():
+
+    return sum(2 ** (square - 1) for square in range(1, 65))
     
    
     translated_words = [translate_word(word) for word in text.lower().split()]
