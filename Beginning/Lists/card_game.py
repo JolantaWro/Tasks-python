@@ -310,3 +310,15 @@ def total():
     
     
     return ' '.join(translated_words)
+
+def is_leap_year(year):
+    if year % 4 == 0:
+        if year % 100 == 0:
+            if year % 400 == 0:
+                return True  # Divisible by 400
+            else:
+                return False  # Divisible by 100, but not 400
+        else:
+            return True  # Divisible by 4, but not 100
+    else:
+        return False  # Not divisible by 4
