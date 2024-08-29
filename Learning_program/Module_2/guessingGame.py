@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
 
-word = input('Please enter a word for your opponent: ')
+numberInWord = True
+while numberInWord is True:
+    word = input('Please enter a word for your opponent: ').lower()
+
+    validCharacters = 0
+    for letter in word:
+        if letter.isdigit() is False:
+            validCharacters += 1
+    if len(word) == validCharacters:
+        numberInWord = False
+    else:
+        print("I'm sorry, valid words cannot contain numbers.")
 
 # Initialize variables
 wrongGuesses = 7
@@ -21,7 +32,7 @@ while guessed is False and wrongGuesses > 0:
     print('Correct Letters Guessed: ', correctLetters)
     print('Wrong Letters Guessed: ', wrongLetters)
 
-    guess = input('What letter would you like to guess?')
+    guess = input('What letter would you like to guess?').lower()
 
     newLetter = True
     if guess in wrongLetters:
@@ -31,6 +42,8 @@ while guessed is False and wrongGuesses > 0:
 
     if newLetter is False:
         print("I'm sorry, you already guessed that letter.")
+    elif guess.isdigit() is True:
+        print("I'm sorry, you can only guess letters.")
     else:
         blanks = ''
         validLetter = False
