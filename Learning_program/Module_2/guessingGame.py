@@ -1,5 +1,44 @@
 #!/usr/bin/env python3
 
+# Initialize variables
+wrongGuesses = 7
+guessed = False
+correctLetters = []
+wrongLetters = []
+
+def processGuess(turn, guess, wrongGuesses):
+    blanks = ''
+    validLetter = False
+
+    if guess in word:
+            validLetter = True
+
+    if validLetter == True:
+        if turn != 1:
+            correctLetters.append(guess)
+            print('Correct!', 'The letter', guess, 'is in the word.')
+    else:
+        if turn != 1:
+            wrongLetters.append(guess)
+            wrongGuesses = wrongGuesses - 1
+            print("I'm sorry,", guess, "is not in the word.")
+        print('You have', wrongGuesses, 'wrong guesses left.')
+
+    lettersGuessedCorrect = 0
+    for letter in word:
+        letterInWord = False
+        if letter in correctLetters:
+            letterInWord = True
+            lettersGuessedCorrect = lettersGuessedCorrect + 1
+        
+        if letterInWord is True:
+            blanks = blanks + letter + ' '
+        else:
+            blanks = blanks + '_ '
+
+    print(blanks)
+    return lettersGuessedCorrect, wrongGuesses
+
 numberInWord = True
 while numberInWord is True:
     word = input('Please enter a word for your opponent: ').lower()
@@ -13,19 +52,8 @@ while numberInWord is True:
     else:
         print("I'm sorry, valid words cannot contain numbers.")
 
-# Initialize variables
-wrongGuesses = 7
-guessed = False
-correctLetters = []
-wrongLetters = []
-blanks = ''
-
-for letter in word:
-    blanks = blanks+'_ '
-
-print(blanks)
-
-print('You have', wrongGuesses, 'wrong guesses left.')
+processGuess(1, '', wrongGuesses)
+turn = 2
 
 while guessed is False and wrongGuesses > 0:
 
@@ -42,41 +70,16 @@ while guessed is False and wrongGuesses > 0:
 
     if newLetter is False:
         print("I'm sorry, you already guessed that letter.")
+        continue
     elif guess.isdigit() is True:
         print("I'm sorry, you can only guess letters.")
-    else:
-        blanks = ''
-        validLetter = False
+        continue
 
-        if guess in word:
-                validLetter = True
+    lettersGuessedCorrect, wrongGuesses = processGuess(turn, guess, wrongGuesses)    
 
-        if validLetter == True:
-            correctLetters.append(guess)
-            print('Correct!', 'The letter', guess, 'is in the word.')
-        else:
-            wrongLetters.append(guess)
-            wrongGuesses = wrongGuesses - 1
-            print("I'm sorry,", guess, "is not in the word.")
-            print('You have', wrongGuesses, 'wrong guesses left.')
-
-        lettersGuessedCorrect = 0
-        for letter in word:
-            letterInWord = False
-            if letter in correctLetters:
-                letterInWord = True
-                lettersGuessedCorrect = lettersGuessedCorrect + 1
-            
-            if letterInWord is True:
-                blanks = blanks + letter + ' '
-            else:
-                blanks = blanks + '_ '
-
-        print(blanks)
-
-        if len(word) == lettersGuessedCorrect:
-            print('You have guessed the word! You had', wrongGuesses, 'wrong guesses left.')
-            guessed = True
+    if len(word) == lettersGuessedCorrect:
+        print('You have guessed the word! You had', wrongGuesses, 'wrong guesses left.')
+        guessed = True
 if wrongGuesses == 0:
     print('Too bad! the word was:', word)
     print("I'm sorry, you lose.")
