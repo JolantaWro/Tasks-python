@@ -1,14 +1,19 @@
 #!/usr/bin/env python3
+from datetime import date
 
-def consent():
-    answer = input('Would you like to know how old you will be in a particular year? (y/n)')
+def consent(prompt):
+    if prompt == 'play':
+        string = 'Would you like to know how old you are?'
+    elif prompt == 'future':
+        string = 'Would you like to know how old you will be on a particular date? (y/n)'
+
+    answer = input(string)
 
     while not (answer == 'y' or answer == 'n'):
         print("I'm sorry, I didn't understand. Please try again.")
         answer = input('Would you like to know how old you will be in a particular year? (y/n)')
 
     if answer == 'n':
-        print("I'm sorry you're not interested. Goodbye!")
         valid = False
     else:
             valid = True
@@ -102,39 +107,62 @@ def validateDate(date):
 
     return dateValid
 
-print('Welcome to the age calculator.')
-valid = consent()
-
-
-if valid is True:
-    dates = []
-
-    dob = obtainDate('dob')
-    dates.append(dob)
-  
-    future = obtainDate('future')
-    dates.append(future)
-
-    month = ['', '']
-    day = ['', '']
-    year = ['', '']
-    
-    month[0], day[0], year[0] = parseDate(dates[0])
-    month[1], day[1], year[1] = parseDate(dates[1])
-            
-    month[0] = int(month[0])
-    month[1] = int(month[1])
-    
+def dateDifference(month, day, year):
     age = int(year[1]) - int(year[0])
     day[0] = int(day[0])
     day[1] = int(day[1])
-    if month[1] <= month[0]:
+    if int(month[1]) <= int(month[0]):
         age = age - 1
         if month[1] == month[0]:
             if day[1] >= day[0]:
                 age = age + 1
 
-    results = 'On {} you will be {} years old.'
+    return age
 
-    print(results.format(dates[1], age))
-    print('Goodbye!')
+
+print('Welcome to the age calculator.')
+
+valid = consent('play')
+
+if valid is True:
+    dates = []
+    month = ['', '']
+    day = ['', '']
+    year = ['', '']
+
+    dob = obtainDate('dob')
+    dates.append(dob)
+
+    month[0], day[0], year[0] = parseDate(dates[0])
+  
+    today = date.today()
+
+    month[1] = today.month
+    day[1] = today.day
+    year[1] = today.year
+
+    age = dateDifference(month, day, year)
+
+    resultsToday = 'Today you are {} years old.'
+    print(resultsToday.format(age))
+
+    valid = consent('future')
+
+    while valid is True:
+        
+        future = obtainDate('future')
+        if len(dates) == 1:
+            dates.append(future)
+        else:
+            dates[1] = future
+    
+        month[1], day[1], year[1] = parseDate(dates[1])
+
+        age = dateDifference(month, day, year)
+        
+        results = 'On {} you will be {} years old.'
+
+        print(results.format(dates[1], age))
+        valid = consent('future')
+
+print("I'm sorry you're not interested. Goodbye!")
