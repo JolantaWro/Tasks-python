@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
+import random
 
 # Initialize variables
 wrongGuesses = 7
 guessed = False
 correctLetters = []
 wrongLetters = []
+
+with open('wordlist.txt', 'r') as words:
+    tempList = words.readlines()
+
+words = []
+for word in tempList:
+    words.append(word.rstrip('\n'))
+
+indexNumber = random.randint(0, (len(words)-1))
 
 def processGuess(turn, guess, wrongGuesses):
     blanks = ''
@@ -39,18 +49,7 @@ def processGuess(turn, guess, wrongGuesses):
     print(blanks)
     return lettersGuessedCorrect, wrongGuesses
 
-numberInWord = True
-while numberInWord is True:
-    word = input('Please enter a word for your opponent: ').lower()
-
-    validCharacters = 0
-    for letter in word:
-        if letter.isdigit() is False:
-            validCharacters += 1
-    if len(word) == validCharacters:
-        numberInWord = False
-    else:
-        print("I'm sorry, valid words cannot contain numbers.")
+word = words[indexNumber]
 
 processGuess(1, '', wrongGuesses)
 turn = 2

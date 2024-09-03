@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 from datetime import date
+import os
+import glob
 
 def consent(prompt):
     if prompt == 'play':
         string = 'Would you like to know how old you are?'
     elif prompt == 'future':
         string = 'Would you like to know how old you will be on a particular date? (y/n)'
-
+    elif prompt == 'save':
+        string = 'Would you like me to save your results to a file? (y/n) '
+    elif prompt == 'old':
+        string = 'Would you like me to add your previous results to the file? (y/n)'
     answer = input(string)
 
     while not (answer == 'y' or answer == 'n'):
@@ -146,6 +151,33 @@ if valid is True:
     resultsToday = 'Today you are {} years old.'
     print(resultsToday.format(age))
 
+    validSave = consent('save')
+
+    if validSave == True:
+        if os.path.isfile('age.txt') is True:
+            validOld = consent('old')
+        else:
+            validOld = False
+        if validOld is True:
+            with open('age.txt', 'r') as oldFile:
+                oldContent = oldFile.read()
+        if os.path.isfile('age.txt') is True:
+            ageFiles = glob.glob('age*.txt')
+            ageFiles2 = sorted(ageFiles, reverse=True)
+            numOfAgeFiles = len(ageFiles)
+            for i in ageFiles2:
+                newFileName = 'age'+str(numOfAgeFiles)+'.txt'
+                os.rename(i, newFileName)
+                numOfAgeFiles += 1           
+        print('Saving your results to age.txt')
+        ageFile = open('age.txt', 'w+')
+        dobMsg = 'Your birthday is '+str(dates[0])+'.\n'
+        todayMsg = 'Today is '+str(month[1])+'/'+str(day[1])+'/'+str(year[1])+'.\n'
+        ageFile.write(dobMsg)
+        ageFile.write(todayMsg)
+        ageFile.write(resultsToday.format(age))
+        ageFile.write('\n')
+        
     valid = consent('future')
 
     while valid is True:
@@ -163,6 +195,17 @@ if valid is True:
         results = 'On {} you will be {} years old.'
 
         print(results.format(dates[1], age))
+
+        if validSave is True:
+            ageFile.write(results.format(dates[1], age))
+            ageFile.write('\n')
+
         valid = consent('future')
+if validOld is True:
+    ageFile.write('\n')
+    ageFile.write('The contents of the previous age.txt were:\n')
+    ageFile.write(oldContent)
+if validSave is True:
+    ageFile.close()
 
 print("I'm sorry you're not interested. Goodbye!")
