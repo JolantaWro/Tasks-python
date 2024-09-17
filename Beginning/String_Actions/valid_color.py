@@ -20,3 +20,5 @@ def colors():
     list: Lista kolorów w odpowiedniej kolejności.
     """
     return COLOR_CODES
+
+print(color_code('red'))
